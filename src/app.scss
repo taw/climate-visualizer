@@ -6,4 +6,18 @@
     font-size: 64px;
     text-align: center;
   }
+
+  .box {
+    height: 81px;
+    width: 100px;
+    border: 1px solid black;
+    display: grid;
+    margin: 10px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .t {
+    border: 1px solid grey;
+    text-align: center;
+    line-height: 25px;
+  }
 }
