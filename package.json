@@ -15,7 +15,8 @@
     "build": "webpack --mode=production",
     "watch": "webpack --watch --progress --colors --display-modules",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "test": "imba test/*.imba"
   },
   "repository": {
     "type": "git",
@@ -23,10 +24,12 @@
   },
   "license": "MIT",
   "dependencies": {
+    "chalk": "^2.4.2",
     "css-loader": "^1.0.1",
     "d3": "^5.9.1",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "fast-deep-equal": "^2.0.1",
     "gh-pages": "^2.0.1",
     "imba": "1.4.1",
     "normalize-scss": "^7.0.1",
