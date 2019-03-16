@@ -1,4 +1,5 @@
 import Sun from './sun'
+import Cell from './cell'
 
 # FFS
 import { scale-linear } from 'd3-scale';
@@ -13,6 +14,11 @@ let sunlight-scale = scale-linear()
   .range(['#aaf', '#faa'])
   .interpolate(interpolate-hcl)
 
+let temp-scale = scale-linear()
+  .domain([-275, -50, 0, 50])
+  .range(['#aaf', '#aaf', '#afa', '#faa'])
+  .interpolate(interpolate-hcl)
+
 tag Sunlight
   prop lat
 
@@ -22,6 +28,30 @@ tag Sunlight
         let sl = sun.daily_radiation(lat, i/12.0) / 0.40
         <span.t style="background-color: {sunlight-scale(sl)}">
           Math.round(100 * sl)
+
+tag CellBox
+  prop lat
+  def setup
+    @cell = Cell.new(sun, lat)
+    # Get some initial data
+    for i in [0..1000]
+      iterate
+
+  def iterate
+    @temps = []
+    for i in [0..11]
+      @temps.push @cell.temp
+      for j in [0..29]
+        let season = i * 30 + j
+        @cell.iterate season
+        # @temps.push @cell.temp
+
+  def render
+    <self.box>
+      for i in [0..11]
+        let t = @temps[i]
+        <span.t style="background-color: {temp-scale(t)}">
+          Math.round(t)
 
 tag App
   def render
@@ -34,11 +64,15 @@ tag App
             "Latitude"
           <th>
             "Sunlight"
+          <th>
+            "Temperature"
         for lat in lats
           <tr>
             <td>
               lat
             <td>
               <Sunlight lat=lat>
+            <td>
+              <CellBox lat=lat>
 
 Imba.mount <App>

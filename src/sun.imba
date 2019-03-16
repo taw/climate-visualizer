@@ -16,10 +16,12 @@ let def roundn v, n
   Math.round(v * ten_n) / ten_n
 
 let def round2 v
-  roundn v, 2
+  # roundn v, 2
+  Math.round(v * 100) / 100
 
 let def round6 v
-  roundn v, 6
+  # roundn v, 6
+  Math.round(v * 1000000) / 1000000
 
 # % in js is broken because js is a stupid language
 let def to24(v)
