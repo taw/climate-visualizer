@@ -39,6 +39,19 @@ test "#radiation" do
 test "#daily_radation" do
   assert-eq sun.daily_radiation(0, 0.25), 0.31649
 
+test "#daily_radation_memo" do
+  assert-eq sun.daily_radiation_memo(0, 0.25), 0.31649
+  assert-eq sun.daily_radiation_memo(10, 0.25), 0.311682
+  assert-eq sun.daily_radiation_memo(0, 0.35), 0.30738
+  assert-eq sun.daily_radiation_memo(20, 0.75), 0.297403
+  assert-eq sun.daily_radiation_memo(10, 0.25), 0.311682
+
+  assert-eq sun:_memo, Map.new([
+    [0, Map.new([[0.25, 0.31649], [0.35, 0.30738]])],
+    [10, Map.new([[0.25, 0.311682]])],
+    [20, Map.new([[0.75, 0.297403]])],
+  ])
+
 # # C <-> K
 # test "emissions" do
 #   expect(Sun.emissions(30)).to eq(0.31649)

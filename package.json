@@ -29,7 +29,7 @@
     "d3": "^5.9.1",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "fast-deep-equal": "^2.0.1",
+    "fast-equals": "^1.6.2",
     "gh-pages": "^2.0.1",
     "imba": "1.4.1",
     "normalize-scss": "^7.0.1",

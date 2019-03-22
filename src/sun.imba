@@ -34,6 +34,7 @@ class Sun
 
   def initialize(tilt = 23.45)
     @tilt = tilt
+    @memo = Map.new
 
   # 0 - winter, 0.5 summer
   def declination(season)
@@ -63,5 +64,21 @@ class Sun
     for h in [0..23]
       e += radiation(lat, season, h)
     round6 (e / 24.0)
+
+  # 2-stage memo
+  def daily_radiation_memo(lat, season)
+    let latmemo
+    if @memo.has(lat)
+      latmemo = @memo.get(lat)
+    else
+      latmemo = Map.new
+      @memo.set(lat, latmemo)
+
+    if latmemo.has(season)
+      latmemo.get(season)
+    else
+      let result = daily_radiation(lat, season)
+      latmemo.set(season, result)
+      result
 
 export default Sun
