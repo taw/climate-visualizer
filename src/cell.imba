@@ -9,16 +9,11 @@ class Cell
     @sun = sun
     @lat = lat
     @temp = 0.0 # Start
-    @sun-memo = Map.new
 
   # 360 might be super slow, especially without proper memoization
   def iterate(season)
     let e = Math.pow(@temp + ck, 4) * factor
-    unless @sun-memo.has season
-      @sun-memo.set season, @sun.daily_radiation(@lat, season / 360.0)
-
-    let i = @sun-memo.get season
-
+    let i = @sun.daily_radiation_memo(@lat, season / 360.0)
     @temp += (i - e) / capacity
     if @temp < -ck
       @temp = -ck
